@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="بنك المعلومات">
+<title>بنك المعلومات الشخصية | نظام الإدارة</title>
+<style>
+:root{--p:#16130c;--p2:#2a2415;--gold:#d4a62a;--bg:#f5f3ee;--h1:#0a0a0a;--h2:#2b2412;--tint:#f3ead0;--tint2:#f4f0e6;--dp:#d4a62a;--card:#fff;--text:#17211f;--muted:#71807c;--line:#e6e0d0;--danger:#b42318;--shadow:0 8px 28px #1a14040f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:var(--ff,Arial,Tahoma,sans-serif)}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+header{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;padding:6px 5%;box-shadow:0 4px 18px #0002}
+.head{max-width:1180px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:15px}.brand{display:flex;align-items:center;gap:9px}.logo{width:30px;height:30px;border:2px solid #d4a62a;border-radius:50%;display:grid;place-items:center;font-size:15px;background:#ffffff14}
+h1{margin:0;font-size:15px}.head p{margin:1px 0 0;color:#e8d9a8;font-size:10px}.head button{background:#ffffff18;color:#fff;border:1px solid #ffffff44;border-radius:9px;padding:5px 9px;font-size:13px}
+.wrap{max-width:1180px;margin:20px auto;padding:0 15px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:16px}.stat{background:var(--card);border-radius:14px;padding:17px;box-shadow:var(--shadow);border-right:4px solid var(--gold)}.stat b{font-size:25px;display:block;color:var(--p)}.stat span{color:var(--muted);font-size:13px}
+.toolbar,.card{background:var(--card);border-radius:15px;box-shadow:var(--shadow);padding:17px;margin-bottom:15px}.toolbar{display:flex;gap:6px;flex-wrap:wrap;padding:11px}.search{flex:1;min-width:160px}
+input,select,textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:7px 9px;font-size:13px;background:#fff;color:var(--text);outline:none}input:focus,select:focus,textarea:focus{border-color:var(--p);box-shadow:0 0 0 3px #d4a62a22}textarea{min-height:60px;resize:vertical}
+.btn{border:0;border-radius:8px;padding:6px 10px;font-size:12.5px;font-weight:bold}.primary{background:var(--p);color:#fff}.gold{background:var(--gold);color:#16130c}.soft{background:var(--tint);color:var(--p)}.danger{background:#fdecea;color:var(--danger)}
+.profile{display:grid;grid-template-columns:90px 1fr auto;gap:16px;align-items:center}.avatar{width:90px;height:90px;border-radius:50%;background:var(--tint);border:3px solid var(--gold);display:grid;place-items:center;font-size:40px}.profile h2{margin:0 0 5px;color:var(--p)}.profile p{margin:0;color:var(--muted)}
+.tabs{display:flex;gap:5px;overflow:auto;margin-bottom:10px}.tab{white-space:nowrap;background:var(--tint);color:var(--p);border:0;padding:6px 10px;font-size:12.5px;border-radius:8px;flex-shrink:0}.tab.active{background:var(--p);color:#fff}
+.section{display:none}.section.active{display:block}.title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px}.title h2{margin:0;color:var(--p);font-size:19px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.field label{display:block;font-size:12px;margin-bottom:3px;color:#4f5d59}.wide{grid-column:1/-1}
+.actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:10px}.table{width:100%;border-collapse:collapse;min-width:700px}.table th,.table td{padding:11px;border-bottom:1px solid var(--line);text-align:start;font-size:13px}.table th{background:var(--tint2);color:var(--p)}.table tr:last-child td{border-bottom:0}
+.empty{text-align:center;padding:25px;color:var(--muted)}.badge{display:inline-block;padding:5px 8px;border-radius:20px;background:var(--tint);color:var(--p);font-size:12px}
+a.lnk{color:var(--p);font-weight:bold;cursor:pointer;text-decoration:underline}.badge.bad{background:#fdecea;color:var(--danger)}.badge.warn{background:#fff3d6;color:#8a5a00}
+.opts{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 16px}.setlbl{font-weight:bold;color:var(--p);margin-top:6px;padding:11px 4px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none}.setlbl::after{content:'▾';color:var(--gold)}.setlbl.open::after{content:'▴'}.setlbl+.opts{margin-top:12px}.btn.wa{background:#25d366;color:#fff;text-decoration:none;display:inline-block}.terms{font-size:13px;line-height:1.9;max-height:240px;overflow:auto;margin-top:8px}.terms ol{margin:0;padding-inline-start:22px}.terms li{margin-bottom:6px}.terms p{margin:0 0 8px}.idimg{max-width:100%;max-height:260px;border-radius:10px;margin-top:8px;border:1px solid var(--line)}.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-top:12px}.ph img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;border:1px solid var(--line);cursor:pointer}.ph button{width:100%;margin-top:4px}.pgrid .empty{grid-column:1/-1}.sublbl{font-weight:bold;font-size:13px;color:var(--muted);margin:8px 2px 0}.opt{border:2px solid var(--line);background:var(--card);color:var(--text);border-radius:9px;padding:9px 14px}.opt.active{border-color:var(--gold);box-shadow:0 0 0 2px #d4a62a55;font-weight:bold}.dot{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:middle;margin-inline-end:6px;border:1px solid #8886}.sw{width:38px;height:38px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px var(--line);padding:0}.sw.active{box-shadow:0 0 0 3px var(--gold)}
+body.sq .btn,body.sq .card,body.sq .toolbar,body.sq input,body.sq select,body.sq textarea,body.sq .tab,body.sq .modalbox,body.sq .table-wrap,body.sq .badge,body.sq .close,body.sq .head button,body.sq .toast,body.sq .opt{border-radius:4px!important}body.fs-s{zoom:.92}body.fs-l{zoom:1.12}
+@keyframes secIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}@keyframes fieldIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}@keyframes tabPop{0%{transform:scale(.9)}60%{transform:scale(1.08)}100%{transform:scale(1)}}
+.section.active{animation:secIn .35s ease}.section.active .field{animation:fieldIn .45s ease both}.tab{transition:background .25s,color .25s,transform .15s}.tab:active{transform:scale(.93)}.tab.active{animation:tabPop .35s ease}
+.section.active .field:nth-child(1){animation-delay:35ms}.section.active .field:nth-child(2){animation-delay:70ms}.section.active .field:nth-child(3){animation-delay:105ms}.section.active .field:nth-child(4){animation-delay:140ms}.section.active .field:nth-child(5){animation-delay:175ms}.section.active .field:nth-child(6){animation-delay:210ms}.section.active .field:nth-child(7){animation-delay:245ms}.section.active .field:nth-child(8){animation-delay:280ms}.section.active .field:nth-child(9){animation-delay:315ms}.section.active .field:nth-child(10){animation-delay:350ms}.section.active .field:nth-child(11){animation-delay:385ms}.section.active .field:nth-child(12){animation-delay:420ms}
+@media(prefers-reduced-motion:reduce){.section.active,.section.active .field,.tab.active{animation:none}}
+@media print{.section.active,.section.active .field{animation:none}}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:18px}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--h1);color:#fff;padding:12px 16px;border-radius:10px;box-shadow:0 8px 25px #0003;display:none;z-index:10}
+.modal{position:fixed;inset:0;background:#0007;display:none;align-items:center;justify-content:center;padding:15px;z-index:20}.modal.show{display:flex}.modalbox{background:var(--card);color:var(--text);border-radius:15px;max-width:600px;width:100%;padding:20px;max-height:92vh;overflow:auto}.modalhead{display:flex;justify-content:space-between;align-items:center}.close{background:#eee;border:0;border-radius:8px;padding:7px 10px}
+body.dark{--bg:#0c0c0c;--card:#171614;--text:#efe9d8;--muted:#b0a88f;--line:#34301f;--p:var(--dp);--tint:#26231a;--tint2:#26231a}body.dark .close{background:#26231a;color:var(--text)}body.dark .primary,body.dark .tab.active{color:#111}body.dark .soft{background:#26231a}body.dark .tab{background:#26231a}body.dark input,body.dark select,body.dark textarea{background:#0f0e0c;color:#fff}body.dark .table th{background:#26231a}
+@media(max-width:700px){.head{align-items:flex-start}.stats{grid-template-columns:1fr 1fr}.profile{grid-template-columns:70px 1fr}.profile .actions{grid-column:1/-1}.avatar{width:70px;height:70px}.grid{grid-template-columns:1fr 1fr}}
+@media print{header,.stats,.toolbar,.tabs,.actions,.no-print,footer{display:none!important}.card{box-shadow:none;border:1px solid #ddd}.section{display:block!important}.profile{border:1px solid #ddd}}
+</style>
+</head>
+<body>
+<header>
+<div class="head">
+<div class="brand"><div class="logo">م</div><div><h1>بنك المعلومات الشخصية</h1><p>نظام إدارة البيانات الشخصية والوظيفية</p></div></div>
+<div style="display:flex;gap:8px"><button onclick="toggleDark()">☾ الوضع الليلي</button><button onclick="openSettings()">⚙️</button></div>
+</div>
+</header>
+
+<main class="wrap">
+<div class="toolbar no-print">
+<input class="search" id="search" placeholder="🔎 ابحث بالاسم أو الرقم الوظيفي..." oninput="renderPeople()">
+<button class="btn primary" onclick="newPerson()">＋ موظف جديد</button>
+<button class="btn soft" onclick="backup()">📤 نسخة احتياطية ومشاركة</button>
+<button class="btn soft" onclick="exportCSV()">تصدير Excel</button>
+<button class="btn soft" onclick="restoreInput.click()">استرجاع</button>
+<input id="restoreInput" type="file" style="display:none" onchange="restore(event)">
+</div>
+
+<div class="card profile">
+<div class="avatar" id="avatar">👤</div>
+<div><h2 id="pName">اسم الموظف</h2><p id="pInfo">العنوان الوظيفي — المدرسة / المديرية</p></div>
+<div class="actions no-print"><button class="btn gold" onclick="window.print()">🖨️ طباعة الملف</button><button class="btn primary" onclick="exportPDF()">📄 تصدير PDF</button><button class="btn soft" onclick="exportWord()">📝 تصدير Word</button></div>
+</div>
+
+<div class="card">
+<div class="tabs no-print">
+<button class="tab active" onclick="tab(this,'personal')">👤 الشخصية</button>
+<button class="tab" onclick="tab(this,'marriage')">💍 الزوجية</button>
+<button class="tab" onclick="tab(this,'photos')">📷 الصور الشخصية</button>
+<button class="tab" onclick="tab(this,'job')">💼 الوظيفة</button>
+<button class="tab" onclick="tab(this,'education')">🎓 التعليم</button>
+<button class="tab" onclick="tab(this,'ids')">🪪 إضافة الهويات</button>
+<button class="tab" onclick="tab(this,'docs')">📎 الثبوتيات</button>
+<button class="tab" onclick="tab(this,'books')">📚 الكتب الرسمية</button>
+<button class="tab" onclick="tab(this,'notes')">📝 الملاحظات</button>
+</div>
+
+<section id="personal" class="section active">
+<div class="title"><h2>المعلومات الشخصية</h2></div>
+<div class="grid">
+<div class="field"><label>الاسم الأول</label><input id="name"></div><div class="field"><label>اسم الأب</label><input id="father"></div><div class="field"><label>اسم الجد</label><input id="grand"></div><div class="field"><label>اسم جد الأب</label><input id="fourth"></div><div class="field"><label>اللقب</label><input id="surname"></div><div class="field"><label>اسم الأم</label><input id="mother"></div><div class="field"><label>اسم أب الأم</label><input id="motherFather"></div><div class="field"><label>اسم جد الأم</label><input id="motherGrand"></div>
+<div class="field"><label>تاريخ الميلاد</label><input id="birth" type="date"></div><div class="field"><label>مكان الولادة</label><input id="birthPlace"></div>
+<div class="field"><label>الجنس</label><select id="gender"><option>ذكر</option><option>أنثى</option></select></div><div class="field"><label>الحالة الاجتماعية</label><select id="marital"><option>أعزب</option><option>متزوج</option><option>مطلق</option><option>أرمل</option></select></div>
+<div class="field"><label>عدد الأطفال</label><input id="children" type="number" min="0"></div><div class="field"><label>رقم الهاتف</label><input id="phone" type="tel"></div>
+<div class="field"><label>البريد الإلكتروني</label><input id="email" type="email"></div>
+</div></section>
+
+<section id="marriage" class="section">
+<div class="title"><h2>معلومات الزوجية</h2></div>
+<div class="grid">
+<div class="field"><label>اسم الزوج / الزوجة</label><input id="spouse"></div>
+<div class="field"><label>اسم أب الزوج / الزوجة</label><input id="spouseFather"></div>
+<div class="field"><label>اسم جد الزوج / الزوجة</label><input id="spouseGrand"></div>
+<div class="field"><label>لقب الزوج / الزوجة</label><input id="spouseSurname"></div>
+<div class="field"><label>تاريخ ميلاد الزوج / الزوجة</label><input id="spouseBirth" type="date"></div>
+<div class="field"><label>مكان ولادة الزوج / الزوجة</label><input id="spouseBirthPlace"></div>
+<div class="field"><label>رقم هوية الزوج / الزوجة</label><input id="spouseId"></div>
+<div class="field"><label>هاتف الزوج / الزوجة</label><input id="spousePhone"></div>
+<div class="field"><label>مهنة الزوج / الزوجة</label><input id="spouseJob"></div>
+<div class="field"><label>جهة عمل الزوج / الزوجة</label><input id="spouseWork"></div>
+<div class="field"><label>هل الزوج / الزوجة موظف حكومي؟</label><select id="spouseGov"><option value=""></option><option>نعم</option><option>لا</option></select></div>
+<div class="field"><label>تاريخ الزواج</label><input id="marriageDate" type="date"></div>
+<div class="field"><label>مكان الزواج</label><input id="marriagePlace"></div>
+<div class="field"><label>رقم عقد الزواج</label><input id="marriageNo"></div>
+<div class="field"><label>جهة عقد الزواج / المحكمة</label><input id="marriageCourt"></div>
+<div class="field wide"><label>أسماء الأطفال وأعمارهم</label><textarea id="childrenNames"></textarea></div>
+<div class="field wide"><label>ملاحظات الزوجية</label><textarea id="marriageNotes"></textarea></div>
+</div>
+</section>
+
+<section id="photos" class="section">
+<div class="title"><h2>الصور الشخصية</h2></div>
+<div class="no-print" style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" onclick="camFile.click()">📷 التقاط صورة</button><button class="btn soft" onclick="galFile.click()">🖼️ من المعرض</button>
+<input id="camFile" type="file" accept="image/*" capture="user" style="display:none" onchange="addPhotos(event)"><input id="galFile" type="file" accept="image/*" multiple style="display:none" onchange="addPhotos(event)"></div>
+<div id="photoGrid" class="pgrid"></div>
+</section>
+
+<section id="ids" class="section">
+<div class="title"><h2>الهوية العراقية</h2></div>
+<div class="grid">
+<div class="field"><label>رقم الهوية</label><input id="idNo"></div>
+<div class="field"><label>رقم السجل</label><input id="idRecord"></div>
+<div class="field"><label>رقم الصحيفة</label><input id="idPage"></div>
+<div class="field"><label>جهة الإصدار</label><input id="idAuth"></div>
+<div class="field"><label>تاريخ الإصدار</label><input id="idIssue" type="date"></div>
+<div class="field"><label>تاريخ الانتهاء</label><input id="idExpiry" type="date"></div>
+<div class="field wide"><label>صورة الهوية</label><input type="hidden" id="idImg"><img id="idImgView" class="idimg" alt="" style="display:none"><div class="no-print" style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" onclick="$('idImgCam').click()">📷 التقاط تلقائي</button><button class="btn soft" onclick="$('idImgFile').click()">＋ إرفاق صورة</button><button class="btn danger" onclick="clearImg('idImg')">حذف الصورة</button><input type="file" id="idImgCam" accept="image/*" capture="environment" style="display:none" onchange="pickImg('idImg',event,true)"><input type="file" id="idImgFile" accept="image/*" style="display:none" onchange="pickImg('idImg',event)"></div></div>
+</div>
+<div class="title" style="margin-top:22px"><h2>بطاقة السكن</h2></div>
+<div class="grid">
+<div class="field"><label>رقم بطاقة السكن</label><input id="resNo"></div>
+<div class="field"><label>جهة الإصدار</label><input id="resAuth"></div>
+<div class="field"><label>تاريخ الإصدار</label><input id="resIssue" type="date"></div>
+<div class="field"><label>المحافظة</label><input id="resProvince"></div>
+<div class="field"><label>القضاء / الناحية</label><input id="resDistrict"></div>
+<div class="field"><label>المحلة</label><input id="resArea"></div>
+<div class="field"><label>الزقاق</label><input id="resStreet"></div>
+<div class="field"><label>رقم الدار</label><input id="resHouse"></div>
+<div class="field wide"><label>صورة بطاقة السكن</label><input type="hidden" id="resImg"><img id="resImgView" class="idimg" alt="" style="display:none"><div class="no-print" style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" onclick="$('resImgCam').click()">📷 التقاط تلقائي</button><button class="btn soft" onclick="$('resImgFile').click()">＋ إرفاق صورة</button><button class="btn danger" onclick="clearImg('resImg')">حذف الصورة</button><input type="file" id="resImgCam" accept="image/*" capture="environment" style="display:none" onchange="pickImg('resImg',event,true)"><input type="file" id="resImgFile" accept="image/*" style="display:none" onchange="pickImg('resImg',event)"></div></div>
+</div>
+</section>
+
+<section id="job" class="section">
+<div class="title"><h2>المعلومات الوظيفية</h2></div>
+<div class="grid">
+<div class="field"><label>الرقم الوظيفي</label><input id="employee"></div><div class="field"><label>العنوان الوظيفي</label><input id="jobTitle"></div>
+<div class="field"><label>الدرجة</label><input id="grade"></div><div class="field"><label>المرحلة</label><input id="step"></div>
+<div class="field"><label>تاريخ التعيين</label><input id="appointment" type="date"></div><div class="field"><label>تاريخ المباشرة</label><input id="start" type="date"></div>
+<div class="field"><label>سنوات الخدمة</label><input id="service" type="number" min="0"></div><div class="field"><label>جهة الانتساب</label><input id="affiliation"></div>
+<div class="field"><label>المدرسة / الدائرة</label><input id="school"></div><div class="field"><label>المديرية</label><input id="directorate"></div>
+<div class="field"><label>القسم</label><input id="department"></div><div class="field"><label>الشعبة</label><input id="section"></div>
+<div class="field"><label>المحافظة</label><input id="province"></div><div class="field"><label>القضاء / الناحية</label><input id="district"></div>
+<div class="field"><label>آخر علاوة</label><input id="lastRaise"></div><div class="field"><label>تاريخ آخر علاوة</label><input id="raiseDate" type="date"></div>
+<div class="field"><label>آخر ترفيع</label><input id="promotion"></div><div class="field"><label>تاريخ الاستحقاق القادم</label><input id="nextDate" type="date"></div>
+</div></section>
+
+<section id="education" class="section">
+<div class="title"><h2>المؤهلات والدورات</h2></div>
+<div class="grid">
+<div class="field"><label>الشهادة</label><select id="educationLevel"><option>دبلوم</option><option>بكالوريوس</option><option>دبلوم عالي</option><option>ماجستير</option><option>دكتوراه</option></select></div>
+<div class="field"><label>الاختصاص</label><input id="specialty"></div><div class="field"><label>الجامعة / المعهد</label><input id="university"></div><div class="field"><label>سنة التخرج</label><input id="graduation" type="number"></div>
+<div class="field"><label>اسم آخر دورة</label><input id="course"></div><div class="field"><label>جهة الدورة</label><input id="courseOrg"></div><div class="field"><label>تاريخ الدورة</label><input id="courseDate" type="date"></div><div class="field"><label>مدة الدورة</label><input id="courseDuration"></div>
+</div></section>
+
+<section id="docs" class="section">
+<div class="title"><h2>الأوراق الثبوتية</h2><button class="btn primary no-print" onclick="openModal('docModal')">＋ إضافة وثيقة</button></div>
+<div class="table-wrap"><table class="table"><thead><tr><th>النوع</th><th>الرقم</th><th>الإصدار</th><th>الانتهاء</th><th>جهة الإصدار</th><th></th></tr></thead><tbody id="docsTable"></tbody></table></div>
+</section>
+
+<section id="books" class="section">
+<div class="title"><h2>الكتب الرسمية</h2><button class="btn primary no-print" onclick="openModal('bookModal')">＋ إضافة كتاب رسمي</button></div>
+<div class="table-wrap"><table class="table"><thead><tr><th>النوع</th><th>الرقم</th><th>التاريخ</th><th>الموضوع</th><th>من</th><th>إلى</th><th>مرفق</th><th></th></tr></thead><tbody id="booksTable"></tbody></table></div>
+</section>
+
+<section id="notes" class="section">
+<div class="title"><h2>العنوان والملاحظات</h2></div>
+<div class="grid">
+<div class="field wide"><label>العنوان الكامل</label><textarea id="address"></textarea></div>
+<div class="field wide"><label>ملاحظات إدارية</label><textarea id="adminNotes"></textarea></div>
+</div>
+</section>
+
+<div class="actions no-print">
+<button class="btn primary" onclick="save()">💾 حفظ البيانات</button><button class="btn soft" onclick="newPerson()">موظف جديد</button><button class="btn gold" onclick="window.print()">🖨️ طباعة</button><button class="btn primary" onclick="exportPDF()">📄 تصدير PDF</button><button class="btn soft" onclick="exportWord()">📝 تصدير Word</button><button class="btn danger" onclick="deletePerson()">حذف الموظف</button>
+</div>
+</div>
+
+<div class="card no-print"><div class="title"><h2>قائمة الموظفين</h2></div><div id="peopleList"></div></div>
+</main>
+
+<footer>بنك المعلومات الشخصية © 2026 — الإصدار 2.0 — يعمل محليًا على جهازك</footer>
+<div id="toast" class="toast"></div>
+
+<div id="lock" style="display:none;position:fixed;inset:0;z-index:99999;background:var(--bg);align-items:center;justify-content:center;padding:20px"><div class="card" style="width:100%;max-width:360px;margin:0"><h2 style="margin-top:0;text-align:center">🔒 تسجيل الدخول</h2><div class="field"><input id="lUser" placeholder="اسم المستخدم" autocomplete="username"></div><div class="field" style="margin-top:8px"><input id="lPass" type="password" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')doLogin()"></div><div id="lErr" style="color:var(--danger);font-size:13px;min-height:18px;margin:6px 0"></div><button class="btn primary" style="width:100%;padding:10px" onclick="doLogin()">دخول</button><p style="text-align:center;margin:12px 0 0"><a class="lnk" onclick="forgotPw()">نسيت كلمة المرور؟</a></p></div></div>
+<div id="cfModal" class="modal" style="z-index:100000"><div class="modalbox" style="max-width:360px"><p id="cfMsg" style="font-weight:bold;margin:4px 0 14px"></p><div class="actions"><button class="btn danger" id="cfYes">نعم، متابعة</button><button class="btn soft" onclick="closeModal('cfModal')">إلغاء</button></div></div></div>
+<div id="setModal" class="modal"><div class="modalbox">
+<div class="modalhead"><h2>⚙️ الإعدادات</h2><button class="close" onclick="closeModal('setModal')">✕</button></div>
+<div class="setlbl">اللغة</div><div class="opts"><button class="opt" data-g="lang" data-v="ar" onclick="setOpt('lang','ar')">العربية</button><button class="opt" data-g="lang" data-v="ku" onclick="setOpt('lang','ku')">کوردی</button><button class="opt" data-g="lang" data-v="en" onclick="setOpt('lang','en')">English</button></div>
+<div class="setlbl">المظهر</div>
+<div class="sublbl">لون التطبيق</div><div class="opts" id="swatches"></div>
+<div class="sublbl">الخط</div><div class="opts" id="fontOpts"></div><div class="opts"><button class="opt" onclick="fontFile.click()">＋ رفع ملف خط (مثل البغدادي)</button><input id="fontFile" type="file" accept=".ttf,.otf,.woff,.woff2" style="display:none" onchange="loadFont(event)"></div>
+<div class="sublbl">وضع العرض</div><div class="opts"><button class="opt" data-g="mode" data-v="light" onclick="setMode(false)">فاتح</button><button class="opt" data-g="mode" data-v="dark" onclick="setMode(true)">داكن</button></div>
+<div class="sublbl">زوايا العناصر</div><div class="opts"><button class="opt" data-g="radius" data-v="round" onclick="setOpt('radius','round')">مدورة</button><button class="opt" data-g="radius" data-v="sq" onclick="setOpt('radius','sq')">حادة</button></div>
+<div class="sublbl">حجم الخط</div><div class="opts"><button class="opt" data-g="size" data-v="s" onclick="setOpt('size','s')">صغير</button><button class="opt" data-g="size" data-v="m" onclick="setOpt('size','m')">متوسط</button><button class="opt" data-g="size" data-v="l" onclick="setOpt('size','l')">كبير</button></div>
+<div class="setlbl">الحساب</div><div id="acctBox"></div>
+<div class="setlbl">التواصل</div><div class="opts"><a class="btn wa" href="https://wa.me/9647713235036" target="_blank" rel="noopener">💬 تواصل عبر واتساب <span dir="ltr">0771 323 5036</span></a></div>
+<div class="setlbl">الشروط والأحكام</div><div class="terms"><ol><li>جميع البيانات التي تُدخلها تُحفظ محليًا على جهازك فقط، ولا تُرسل إلى أي خادم.</li><li>أنت المسؤول عن دقة البيانات وعن حمايتها، وعن حماية جهازك من الوصول غير المصرّح به.</li><li>يُنصح بإنشاء نسخة احتياطية بشكل دوري، فحذف بيانات المتصفح أو التطبيق أو تغيير الجهاز قد يؤدي إلى فقدان البيانات.</li><li>يحتوي التطبيق على بيانات شخصية حساسة، فلا تشاركها أو تطبعها إلا لجهة مخوّلة بذلك.</li><li>عند اختيار خطوط من الإنترنت قد يُحمَّل الخط من خدمة Google Fonts، وزر واتساب يفتح تطبيقًا خارجيًا يخضع لشروطه.</li><li>يُقدَّم التطبيق كما هو دون أي ضمان، ولا يتحمل مطوّره مسؤولية أي خسارة ناتجة عن استخدامه.</li><li>استمرارك في استخدام التطبيق يعني موافقتك على هذه الشروط، وقد تُحدَّث عند صدور إصدارات جديدة.</li></ol></div>
+<div class="setlbl">سياسة الخصوصية</div><div class="terms"><ol><li>لا يجمع التطبيق أي بيانات عنك، والحساب اختياري ويُحفظ محليًا على جهازك فقط.</li><li>البيانات التي تُدخلها (الشخصية والوظيفية والوثائق والكتب الرسمية ومرفقاتها) تُخزَّن محليًا على جهازك فقط.</li><li>لا نشارك بياناتك مع أي طرف ثالث، ولا نستخدم إعلانات أو أدوات تتبع.</li><li>عند اختيار خط من الإنترنت يتصل جهازك بخدمة Google Fonts لتحميله، وقد تصلها معلومات اتصال عادية مثل عنوان IP.</li><li>ملفات النسخة الاحتياطية وملفات التصدير (Excel وPDF) تُحفظ في المكان الذي تختاره، وأنت المسؤول عن حمايتها.</li><li>يمكنك حذف أي ملف موظف في أي وقت، ومسح كل البيانات من إعدادات المتصفح أو التطبيق.</li><li>للاستفسار عن الخصوصية تواصل معنا عبر واتساب من قسم التواصل.</li><li>قد تُحدَّث سياسة الخصوصية هذه عند صدور إصدارات جديدة.</li></ol></div>
+<div class="setlbl">حول</div><div class="terms"><p><b>بنك المعلومات الشخصية</b></p><p>الإصدار 2.0</p><p>تطبيق لإدارة الملفات الشخصية والوظيفية للموظفين وحفظ وثائقهم وكتبهم الرسمية في مكان واحد.</p><p>يعمل محليًا على جهازك دون الحاجة إلى إنترنت.</p><p>اللغات المدعومة: العربية، الكوردية، الإنجليزية.</p><p>المطوّر: <span dir="ltr">AHMED</span></p><p>© 2026 جميع الحقوق محفوظة.</p></div>
+<div class="actions"><button class="btn soft" onclick="resetSettings()">إعادة الضبط</button><button class="btn primary" onclick="closeModal('setModal')">إغلاق</button></div>
+</div></div>
+
+<div id="docModal" class="modal"><div class="modalbox">
+<div class="modalhead"><h2>إضافة ورقة ثبوتية</h2><button class="close" onclick="closeModal('docModal')">✕</button></div>
+<div class="grid">
+<div class="field"><label>نوع الوثيقة</label><select id="docType"><option>البطاقة الوطنية</option><option>بطاقة السكن</option><option>هوية الأحوال المدنية</option><option>شهادة الجنسية</option><option>جواز السفر</option><option>هوية الموظف</option><option>أخرى</option></select></div>
+<div class="field"><label>رقم الوثيقة</label><input id="docNo"></div><div class="field"><label>تاريخ الإصدار</label><input id="docDate" type="date"></div><div class="field"><label>تاريخ الانتهاء</label><input id="docExpiry" type="date"></div><div class="field"><label>جهة الإصدار</label><input id="docFrom"></div>
+</div><div class="actions"><button class="btn primary" onclick="addDoc()">إضافة</button><button class="btn soft" onclick="closeModal('docModal')">إلغاء</button></div>
+</div></div>
+
+<div id="bookModal" class="modal"><div class="modalbox">
+<div class="modalhead"><h2>إضافة كتاب رسمي</h2><button class="close" onclick="closeModal('bookModal')">✕</button></div>
+<div class="grid">
+<div class="field"><label>نوع الكتاب</label><select id="bookType"><option>كتاب رسمي</option><option>أمر إداري</option><option>أمر وزاري</option><option>تأييد</option><option>تنسيب</option><option>نقل</option><option>ترفيع</option><option>علاوة</option><option>أخرى</option></select></div>
+<div class="field"><label>رقم الكتاب</label><input id="bookNo"></div><div class="field"><label>تاريخ الكتاب</label><input id="bookDate" type="date"></div><div class="field"><label>جهة الإصدار</label><input id="bookFrom"></div><div class="field"><label>موجه إلى</label><input id="bookTo"></div><div class="field"><label>الموضوع</label><input id="bookSubject"></div><div class="field wide"><label>إرفاق صورة / PDF</label><input id="bookFile" type="file" accept="image/*,.pdf"></div>
+</div><div class="actions"><button class="btn primary" onclick="addBook()">إضافة</button><button class="btn soft" onclick="closeModal('bookModal')">إلغاء</button></div>
+</div></div>
+
+<script>
+const F=["name","father","grand","fourth","surname","mother","motherFather","motherGrand","birth","birthPlace","gender","marital","children","spouse","spouseFather","spouseGrand","spouseSurname","spouseBirth","spouseBirthPlace","spouseId","spousePhone","spouseJob","spouseWork","spouseGov","marriageDate","marriagePlace","marriageNo","marriageCourt","childrenNames","marriageNotes","phone","email","employee","jobTitle","grade","step","appointment","start","service","affiliation","school","directorate","department","section","province","district","lastRaise","raiseDate","promotion","nextDate","educationLevel","specialty","university","graduation","course","courseOrg","courseDate","courseDuration","address","adminNotes","idNo","idRecord","idPage","idAuth","idIssue","idExpiry","idImg","resNo","resAuth","resIssue","resProvince","resDistrict","resArea","resStreet","resHouse","resImg"];
+let people=[],current=-1,docs=[],books=[],photos=[];
+const $=id=>document.getElementById(id);
+
+function load(){try{people=JSON.parse(localStorage.getItem("pro_people")||"[]")}catch(e){people=[]}renderPeople();updateStats()}
+function save(){let p=read();if(!p.name.trim()){toast("اكتب اسم الموظف أولاً");return}p.docs=docs;p.books=books;p.photos=photos;if(current<0){people.push(p);current=people.length-1}else people[current]=p;if(!persist())return;renderPeople();updateStats();preview();toast("تم حفظ الملف بنجاح")}
+function persist(){try{localStorage.setItem("pro_people",JSON.stringify(people));return true}catch(e){toast("المساحة ممتلئة: قلّل حجم المرفقات أو أنشئ نسخة احتياطية");return false}}
+function fullName(p){return[p.name,p.father,p.grand,p.fourth,p.surname].filter(x=>x&&String(x).trim()).join(" ")}
+function read(){let o={};F.forEach(x=>o[x]=$(x).value);return o}
+function fill(p){F.forEach(x=>$(x).value=p?.[x]||"");docs=p?.docs||[];books=p?.books||[];photos=p?.photos||[];preview();renderDocs();renderBooks();renderPhotos()}
+function newPerson(){current=-1;fill({});toast("تم فتح ملف جديد");window.scrollTo(0,0)}
+function openPerson(i){current=i;fill(people[i]);toast("تم فتح ملف الموظف");window.scrollTo(0,0)}
+function deletePerson(i){let idx=(i===undefined)?current:i;if(idx<0||!people[idx]){toast("حدد موظفاً أولاً");return}askConfirm("حذف ملف الموظف؟",()=>{people.splice(idx,1);current=-1;persist();newPerson();renderPeople();updateStats();toast("تم الحذف")})}
+function shrink(im,m){let k=Math.min(1,(m||900)/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext("2d").drawImage(im,0,0,c.width,c.height);return c}
+function autoScan(im){let c=shrink(im,1400),w=c.width,h=c.height,k=Math.min(1,160/Math.max(w,h)),sw=Math.max(8,Math.round(w*k)),sh=Math.max(8,Math.round(h*k)),s=document.createElement("canvas");s.width=sw;s.height=sh;let sx=s.getContext("2d");sx.drawImage(c,0,0,sw,sh);let d=sx.getImageData(0,0,sw,sh).data,ring=[];
+for(let i=0;i<sw;i++)for(let j=0;j<sh;j++)if(i<3||j<3||i>=sw-3||j>=sh-3)ring.push((j*sw+i)*4);
+let med=ch=>{let a=ring.map(p=>d[p+ch]).sort((u,v)=>u-v);return a[a.length>>1]},br=med(0),bg=med(1),bb=med(2),rc=new Array(sh).fill(0),cc=new Array(sw).fill(0);
+for(let j=0;j<sh;j++)for(let i=0;i<sw;i++){let p=(j*sw+i)*4;if(Math.abs(d[p]-br)+Math.abs(d[p+1]-bg)+Math.abs(d[p+2]-bb)>70){rc[j]++;cc[i]++}}
+let t1=sw*.08,t2=sh*.08,y0=rc.findIndex(v=>v>t1),x0=cc.findIndex(v=>v>t2),y1=-1,x1=-1;for(let j=sh-1;j>=0;j--)if(rc[j]>t1){y1=j;break}for(let i=sw-1;i>=0;i--)if(cc[i]>t2){x1=i;break}
+let cx=0,cy=0,cw=w,ch=h;
+if(y0>=0&&x0>=0&&y1>y0&&x1>x0){let a=(x1-x0+1)*(y1-y0+1)/(sw*sh);if(a>.2&&a<.97){let px=Math.round(sw*.02),py=Math.round(sh*.02);x0=Math.max(0,x0-px);y0=Math.max(0,y0-py);x1=Math.min(sw-1,x1+px);y1=Math.min(sh-1,y1+py);cx=x0/sw*w;cy=y0/sh*h;cw=(x1-x0+1)/sw*w;ch=(y1-y0+1)/sh*h}}
+cw=Math.round(cw);ch=Math.round(ch);let rot=ch>cw*1.1,o=document.createElement("canvas");o.width=rot?ch:cw;o.height=rot?cw:ch;let ox=o.getContext("2d");if(rot){ox.translate(o.width,0);ox.rotate(Math.PI/2)}ox.drawImage(c,cx,cy,cw,ch,0,0,cw,ch);
+let id=ox.getImageData(0,0,o.width,o.height),q=id.data,hist=new Array(256).fill(0),st=Math.max(1,Math.floor(q.length/4/40000)),tot=0;
+for(let p=0;p<q.length;p+=4*st){hist[Math.round(.299*q[p]+.587*q[p+1]+.114*q[p+2])]++;tot++}
+let lo=0,hi=255,acc=0;for(let v=0;v<256;v++){acc+=hist[v];if(acc>=tot*.01){lo=v;break}}acc=0;for(let v=255;v>=0;v--){acc+=hist[v];if(acc>=tot*.01){hi=v;break}}
+if(hi-lo>30){let f=255/(hi-lo);for(let p=0;p<q.length;p+=4)for(let n=0;n<3;n++)q[p+n]=Math.max(0,Math.min(255,(q[p+n]-lo)*f))}
+ox.putImageData(id,0,0);return shrink(o,1000)}
+function pickImg(id,e,auto){let f=e.target.files[0];e.target.value="";if(!f)return;let r=new FileReader();r.onload=()=>{let im=new Image();im.onload=()=>{let c;try{c=auto?autoScan(im):shrink(im,900)}catch(x){c=shrink(im,900)}$(id).value=c.toDataURL("image/jpeg",auto?.8:.7);preview();toast(auto?"تم التقاط الصورة وتعديلها تلقائيًا":"تمت إضافة الصورة")};im.onerror=()=>toast("الملف ليس صورة");im.src=r.result};r.readAsDataURL(f)}
+function clearImg(id){$(id).value="";preview()}
+function preview(){["idImg","resImg"].forEach(k=>{let v=$(k).value,i=$(k+"View");i.src=v||"";i.style.display=v?"block":"none"});$("pName").textContent=fullName(read())||"اسم الموظف";$("pInfo").textContent=($("jobTitle").value||"العنوان الوظيفي")+" — "+($("school").value||"المدرسة / المديرية")}
+function renderPeople(){let q=($("search").value||"").toLowerCase(),a=people.map((p,i)=>({p,i})).filter(x=>(fullName(x.p)+" "+x.p.employee).toLowerCase().includes(q)),b=$("peopleList");if(!a.length){b.innerHTML='<div class="empty">لا توجد ملفات موظفين</div>';return}b.innerHTML='<div class="table-wrap"><table class="table"><thead><tr><th>الاسم</th><th>الرقم الوظيفي</th><th>الوظيفة</th><th>المدرسة</th><th></th></tr></thead><tbody>'+a.map(x=>'<tr><td>'+esc(fullName(x.p))+'</td><td>'+esc(x.p.employee)+'</td><td>'+esc(x.p.jobTitle)+'</td><td>'+esc(x.p.school)+'</td><td><button class="btn soft" onclick="openPerson('+x.i+')">فتح</button> <button class="btn danger" onclick="deletePerson('+x.i+')">حذف</button></td></tr>').join("")+'</tbody></table></div>'}
+function addDoc(){if(!$("docNo").value){toast("أدخل رقم الوثيقة");return}docs.push({type:$("docType").value,no:$("docNo").value,date:$("docDate").value,expiry:$("docExpiry").value,from:$("docFrom").value});renderDocs();closeModal("docModal");clearIds(["docNo","docDate","docExpiry","docFrom"]);toast("تمت إضافة الوثيقة")}
+function renderDocs(){let t=$("docsTable");if(!docs.length){t.innerHTML='<tr><td colspan="6" class="empty">لا توجد أوراق ثبوتية</td></tr>';return}t.innerHTML=docs.map((d,i)=>'<tr><td><span class="badge">'+esc(d.type)+'</span></td><td>'+esc(d.no)+'</td><td>'+esc(d.date)+'</td><td>'+esc(d.expiry)+expBadge(d.expiry)+'</td><td>'+esc(d.from)+'</td><td><button class="btn danger" onclick="removeDoc('+i+')">حذف</button></td></tr>').join("")}
+function removeDoc(i){docs.splice(i,1);renderDocs();toast("تم حذف الوثيقة")}
+function addBook(){let f=$("bookFile").files[0];if(!$("bookNo").value&&!$("bookSubject").value){toast("أدخل رقم الكتاب أو موضوعه");return}if(f&&f.size>1500000){toast("حجم المرفق كبير (الحد 1.5 ميغابايت)");return}if(f){let r=new FileReader();r.onload=()=>pushBook(f,r.result);r.readAsDataURL(f)}else pushBook(null,"")}
+function pushBook(f,data){books.push({type:$("bookType").value,no:$("bookNo").value,date:$("bookDate").value,from:$("bookFrom").value,to:$("bookTo").value,subject:$("bookSubject").value,file:f?f.name:"",data:data});renderBooks();closeModal("bookModal");clearIds(["bookNo","bookDate","bookFrom","bookTo","bookSubject"]);$("bookFile").value="";toast("تمت إضافة الكتاب الرسمي")}
+function renderBooks(){let t=$("booksTable");if(!books.length){t.innerHTML='<tr><td colspan="8" class="empty">لا توجد كتب رسمية</td></tr>';return}t.innerHTML=books.map((b,i)=>'<tr><td><span class="badge">'+esc(b.type)+'</span></td><td>'+esc(b.no)+'</td><td>'+esc(b.date)+'</td><td>'+esc(b.subject)+'</td><td>'+esc(b.from)+'</td><td>'+esc(b.to)+'</td><td>'+(b.data?'<a class="lnk" onclick="openBookFile('+i+')">'+esc(b.file)+'</a>':esc(b.file||"—"))+'</td><td><button class="btn danger" onclick="removeBook('+i+')">حذف</button></td></tr>').join("")}
+function removeBook(i){books.splice(i,1);renderBooks();toast("تم حذف الكتاب")}
+function openBookFile(i){let b=books[i];if(!b||!b.data)return;fetch(b.data).then(r=>r.blob()).then(bl=>window.open(URL.createObjectURL(bl),"_blank"))}
+function expBadge(d){if(!d)return"";let days=Math.ceil((new Date(d)-new Date())/864e5);if(days<0)return' <span class="badge bad">منتهية</span>';if(days<=90)return' <span class="badge warn">تنتهي بعد '+days+' يوم</span>';return""}
+function calcService(){let v=$("start").value;if(!v)return;let y=Math.floor((new Date()-new Date(v))/(365.25*864e5));if(y>=0)$("service").value=y}
+function exportCSV(){if(!people.length){toast("لا توجد بيانات للتصدير");return}let FF=F.filter(k=>!/Img$/.test(k)),q=v=>'"'+String(v||"").replace(/"/g,'""')+'"',rows=[FF.map(q).join(",")].concat(people.map(p=>FF.map(k=>q(p[k])).join(",")));let blob=new Blob(["\ufeff"+rows.join("\n")],{type:"text/csv;charset=utf-8"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="الموظفين.csv";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500);toast("تم تصدير الملف")}
+function addPhotos(e){let fs=[...e.target.files];e.target.value="";fs.forEach(f=>{let r=new FileReader();r.onload=()=>{let im=new Image();im.onload=()=>{if(photos.length>=12){toast("الحد الأقصى 12 صورة");return}let k=Math.min(1,900/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext("2d").drawImage(im,0,0,c.width,c.height);photos.push(c.toDataURL("image/jpeg",.7));renderPhotos();toast("تمت إضافة الصورة")};im.onerror=()=>toast("الملف ليس صورة");im.src=r.result};r.readAsDataURL(f)})}
+function removePhoto(i){photos.splice(i,1);renderPhotos();toast("تم حذف الصورة")}
+function viewPhoto(i){fetch(photos[i]).then(r=>r.blob()).then(b=>window.open(URL.createObjectURL(b),"_blank"))}
+function renderPhotos(){$("photoGrid").innerHTML=photos.length?photos.map((d,i)=>'<div class="ph"><img src="'+d+'" onclick="viewPhoto('+i+')"><button class="btn danger no-print" onclick="removePhoto('+i+')">حذف</button></div>').join(""):'<div class="empty">لا توجد صور</div>';let a=$("avatar");if(photos.length){a.style.background="url("+photos[0]+") center/cover";a.textContent=""}else{a.style.background="";a.textContent="👤"}}
+function exportWord(){let n=fullName(read());if(!n){toast("اكتب اسم الموظف أولاً");return}
+let rtl=document.documentElement.dir==="rtl",al=rtl?"right":"left",e=esc,body="";
+const tbl=(rows)=>'<table>'+rows+'</table>';
+document.querySelectorAll("section.section").forEach(sec=>{let t=sec.querySelector("h2"),rows="";
+if(sec.id==="photos"){if(!photos.length)return;rows=photos.map(d=>'<tr><td><img src="'+d+'" width="220"></td></tr>').join("")}else if(sec.id==="docs"||sec.id==="books"){let heads=[...sec.querySelectorAll("thead th")].map(x=>x.textContent).filter(Boolean),data=sec.id==="docs"?docs.map(d=>[d.type,d.no,d.date,d.expiry,d.from]):books.map(b=>[b.type,b.no,b.date,b.subject,b.from,b.to,b.file]);if(!data.length)return;rows='<tr>'+heads.map(h=>'<th style="background:#f3ead0">'+e(h)+'</th>').join("")+'</tr>'+data.map(r=>'<tr>'+r.map((c,i)=>'<td>'+e(i===0?tr(c||""):c||"")+'</td>').join("")+'</tr>').join("")}
+else{sec.querySelectorAll(".field").forEach(f=>{let lb=f.querySelector("label"),hid=f.querySelector("input[type=hidden]");if(hid){if(hid.value)rows+='<tr><td class="l">'+e(lb.textContent)+'</td><td><img src="'+hid.value+'" width="320"></td></tr>';return}let inp=f.querySelector("input,select,textarea");if(!inp||!inp.value)return;let v=inp.tagName==="SELECT"?tr(inp.value):inp.value;rows+='<tr><td class="l">'+e(lb.textContent)+'</td><td>'+e(v).replace(/\n/g,"<br>")+'</td></tr>'})}
+if(rows)body+='<h2>'+e(t?t.textContent:"")+'</h2>'+tbl(rows)});
+let html='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><title>'+e(n)+'</title><style>body{font-family:Arial,Tahoma,sans-serif;direction:'+(rtl?"rtl":"ltr")+'}h1{color:#16130c;font-size:20pt}h2{background:#d4a62a;color:#16130c;padding:4px 8px;font-size:14pt}table{border-collapse:collapse;width:100%;margin-bottom:12pt}td,th{border:1px solid #999;padding:5px;text-align:'+al+'}td.l{background:#f3ead0;width:35%;font-weight:bold}</style></head><body dir="'+(rtl?"rtl":"ltr")+'"><h1>'+e(n)+'</h1>'+body+'</body></html>';
+let a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+html],{type:"application/msword;charset=utf-8"}));a.download=n+".doc";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);toast("تم تصدير ملف Word")}
+function exportPDF(){let n=fullName(read());if(!n){toast("اكتب اسم الموظف أولاً");return}let old=document.title;document.title="ملف الموظف - "+n;window.addEventListener("afterprint",()=>{document.title=old},{once:true});toast("اختر «حفظ كـ PDF» من نافذة الطباعة");setTimeout(()=>window.print(),400)}
+function clearIds(a){a.forEach(x=>$(x).value="")}
+function tab(btn,id){document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".section").forEach(x=>x.classList.remove("active"));btn.classList.add("active");$(id).classList.add("active")}
+function askConfirm(msg,cb){$("cfMsg").textContent=msg;$("cfYes").onclick=()=>{closeModal("cfModal");cb()};openModal("cfModal")}
+function openModal(id){$(id).classList.add("show")}function closeModal(id){$(id).classList.remove("show")}
+function updateStats(){}
+async function backup(){let data=JSON.stringify({app:"pib",version:2,date:new Date().toISOString(),people:people},null,2),name="بنك_المعلومات_"+new Date().toISOString().slice(0,10)+".json",file=null;try{file=new File([data],name,{type:"application/json"})}catch(e){}
+if(file&&navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:name});toast("تمت مشاركة النسخة الاحتياطية");return}catch(e){if(e&&e.name==="AbortError")return}}
+let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([data],{type:"application/json"}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);toast("تم إنشاء النسخة الاحتياطية")}
+function restore(e){let f=e.target.files[0];e.target.value="";if(!f)return;let r=new FileReader();r.onload=()=>{let arr;try{let d=JSON.parse(r.result);arr=Array.isArray(d)?d:d.people;if(!Array.isArray(arr))throw 0}catch(x){toast("ملف النسخة الاحتياطية غير صالح");return}let apply=()=>{people=arr;if(!persist())return;current=-1;fill({});renderPeople();updateStats();toast("تم استرجاع البيانات")};if(people.length)askConfirm("سيتم استبدال البيانات الحالية بالنسخة الاحتياطية. متابعة؟",apply);else apply()};r.readAsText(f)}
+function toggleDark(){document.body.classList.toggle("dark");localStorage.setItem("pro_dark",document.body.classList.contains("dark"))}
+function toast(t){let x=$("toast");x.textContent=t;x.style.display="block";setTimeout(()=>x.style.display="none",2200)}
+function esc(s){return String(s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+
+const THEMES={gold:{p:"#16130c",p2:"#2a2415",gold:"#d4a62a",h1:"#0a0a0a",h2:"#2b2412",tint:"#f3ead0",tint2:"#f4f0e6",bg:"#f5f3ee",dp:"#d4a62a"},green:{p:"#075846",p2:"#0d755f",gold:"#d9aa32",h1:"#043f35",h2:"#0b715d",tint:"#e5f0ed",tint2:"#f1f5f3",bg:"#f3f6f5",dp:"#3fc1a0"},blue:{p:"#12356b",p2:"#1d4f9c",gold:"#d9aa32",h1:"#0b2247",h2:"#1d4f9c",tint:"#e3ebf7",tint2:"#eef2fa",bg:"#f2f5fa",dp:"#6ea8ff"},purple:{p:"#4a2a7a",p2:"#6a3fa8",gold:"#d9aa32",h1:"#2d1650",h2:"#6a3fa8",tint:"#ece4f7",tint2:"#f3eefa",bg:"#f6f3fa",dp:"#b794f4"},burgundy:{p:"#7a1f3d",p2:"#a12a52",gold:"#d9aa32",h1:"#4a0f24",h2:"#a12a52",tint:"#f7e3ea",tint2:"#fbeef2",bg:"#faf3f5",dp:"#f08aa8"}};
+const T={};[
+["م","P","ب"],
+["بنك المعلومات الشخصية | نظام الإدارة","Personal Information Bank | Management System","بانکی زانیاری کەسی | سیستەمی بەڕێوەبردن"],
+["بنك المعلومات الشخصية","Personal Information Bank","بانکی زانیاری کەسی"],
+["نظام إدارة البيانات الشخصية والوظيفية","Personal & Employment Data Management System","سیستەمی بەڕێوەبردنی زانیاری کەسی و فەرمانبەری"],
+["☾ الوضع الليلي","☾ Dark mode","☾ دۆخی شەو"],
+["🔎 ابحث بالاسم أو الرقم الوظيفي...","🔎 Search by name or employee no...","🔎 بگەڕێ بە ناو یان ژمارەی فەرمانبەری..."],
+["＋ موظف جديد","＋ New employee","＋ فەرمانبەری نوێ"],
+["نسخة احتياطية","Backup","کۆپیی یەدەگ"],["تصدير Excel","Export Excel","هەناردەی Excel"],["استرجاع","Restore","گەڕاندنەوە"],
+["اسم الموظف","Employee name","ناوی فەرمانبەر"],
+["العنوان الوظيفي — المدرسة / المديرية","Job title — School / Directorate","ناونیشانی کار — قوتابخانە / بەڕێوەبەرایەتی"],
+["🖨️ طباعة الملف","🖨️ Print file","🖨️ چاپکردنی فایل"],["📄 تصدير PDF","📄 Export PDF","📄 هەناردەی PDF"],
+["👤 الشخصية","👤 Personal","👤 کەسی"],["💼 الوظيفة","💼 Job","💼 کار"],["🎓 التعليم","🎓 Education","🎓 خوێندن"],["📎 الثبوتيات","📎 Documents","📎 بەڵگەنامەکان"],["📚 الكتب الرسمية","📚 Official letters","📚 نامە فەرمییەکان"],["📝 الملاحظات","📝 Notes","📝 تێبینییەکان"],
+["المعلومات الشخصية","Personal information","زانیاری کەسی"],["المعلومات الوظيفية","Job information","زانیاری کار"],["المؤهلات والدورات","Qualifications & courses","بڕوانامە و خولەکان"],["الأوراق الثبوتية","Identity documents","بەڵگەنامەی ناسنامە"],["الكتب الرسمية","Official letters","نامە فەرمییەکان"],["العنوان والملاحظات","Address & notes","ناونیشان و تێبینی"],
+["الاسم الكامل","Full name","ناوی تەواو"],["اسم الأم","Mother's name","ناوی دایک"],["تاريخ الميلاد","Date of birth","بەرواری لەدایکبوون"],["مكان الولادة","Place of birth","شوێنی لەدایکبوون"],["الجنس","Gender","ڕەگەز"],["الحالة الاجتماعية","Marital status","باری خێزانی"],["عدد الأطفال","Number of children","ژمارەی منداڵان"],["رقم الهاتف","Phone number","ژمارەی تەلەفۆن"],["البريد الإلكتروني","Email","ئیمەیڵ"],
+["ذكر","Male","نێر"],["أنثى","Female","مێ"],["أعزب","Single","سەڵت"],["متزوج","Married","هاوسەردار"],["مطلق","Divorced","جیابووەوە"],["أرمل","Widowed","بێوە"],
+["الرقم الوظيفي","Employee no.","ژمارەی فەرمانبەری"],["العنوان الوظيفي","Job title","ناونیشانی کار"],["الدرجة","Grade","پلە"],["المرحلة","Step","قۆناغ"],["تاريخ التعيين","Appointment date","بەرواری دامەزراندن"],["تاريخ المباشرة","Start date","بەرواری دەستبەکاربوون"],["سنوات الخدمة","Years of service","ساڵانی خزمەت"],["جهة الانتساب","Affiliation","لایەنی سەر بە"],["المدرسة / الدائرة","School / Office","قوتابخانە / دەزگا"],["المديرية","Directorate","بەڕێوەبەرایەتی"],["القسم","Department","بەش"],["الشعبة","Division","لق"],["المحافظة","Governorate","پارێزگا"],["القضاء / الناحية","District / Sub-district","قەزا / ناحیە"],["آخر علاوة","Last increment","دوایین زیادکردن"],["تاريخ آخر علاوة","Last increment date","بەرواری دوایین زیادکردن"],["آخر ترفيع","Last promotion","دوایین بەرزکردنەوە"],["تاريخ الاستحقاق القادم","Next due date","بەرواری شایستەیی داهاتوو"],
+["الشهادة","Degree","بڕوانامە"],["دبلوم","Diploma","دبلۆم"],["بكالوريوس","Bachelor's","بەکالۆریۆس"],["دبلوم عالي","Higher diploma","دبلۆمی باڵا"],["ماجستير","Master's","ماجستێر"],["دكتوراه","PhD","دکتۆرا"],["الاختصاص","Specialty","پسپۆڕی"],["الجامعة / المعهد","University / Institute","زانکۆ / پەیمانگا"],["سنة التخرج","Graduation year","ساڵی دەرچوون"],["اسم آخر دورة","Last course name","ناوی دوایین خول"],["جهة الدورة","Course provider","لایەنی خول"],["تاريخ الدورة","Course date","بەرواری خول"],["مدة الدورة","Course duration","ماوەی خول"],
+["＋ إضافة وثيقة","＋ Add document","＋ زیادکردنی بەڵگە"],["＋ إضافة كتاب رسمي","＋ Add official letter","＋ زیادکردنی نامەی فەرمی"],
+["النوع","Type","جۆر"],["الرقم","Number","ژمارە"],["الإصدار","Issued","دەرچوون"],["الانتهاء","Expires","بەسەرچوون"],["جهة الإصدار","Issuing authority","لایەنی دەرکردن"],["حذف","Delete","سڕینەوە"],["التاريخ","Date","بەروار"],["الموضوع","Subject","بابەت"],["من","From","لە"],["إلى","To","بۆ"],["مرفق","Attachment","پێوەکراو"],
+["العنوان الكامل","Full address","ناونیشانی تەواو"],["ملاحظات إدارية","Administrative notes","تێبینی ئیداری"],
+["💾 حفظ البيانات","💾 Save data","💾 پاشەکەوتکردن"],["موظف جديد","New employee","فەرمانبەری نوێ"],["🖨️ طباعة","🖨️ Print","🖨️ چاپ"],["حذف الموظف","Delete employee","سڕینەوەی فەرمانبەر"],
+["قائمة الموظفين","Employees list","لیستی فەرمانبەران"],["لا توجد ملفات موظفين","No employee files","هیچ فایلێکی فەرمانبەر نییە"],["الاسم","Name","ناو"],["الوظيفة","Job","کار"],["المدرسة","School","قوتابخانە"],["فتح","Open","کردنەوە"],
+["بنك المعلومات الشخصية © 2026 — الإصدار 2.0 — يعمل محليًا على جهازك","Personal Information Bank © 2026 — v2.0 — Runs locally on your device","بانکی زانیاری کەسی © 2026 — وەشانی 2.0 — لەسەر ئامێرەکەت کار دەکات"],
+["إضافة ورقة ثبوتية","Add identity document","زیادکردنی بەڵگەی ناسنامە"],["نوع الوثيقة","Document type","جۆری بەڵگە"],["البطاقة الوطنية","National ID card","کارتی نیشتیمانی"],["بطاقة السكن","Residence card","کارتی نیشتەجێبوون"],["هوية الأحوال المدنية","Civil status ID","ناسنامەی باری شارستانی"],["شهادة الجنسية","Nationality certificate","بڕوانامەی هاوڵاتیبوون"],["جواز السفر","Passport","پاسپۆرت"],["هوية الموظف","Employee ID","ناسنامەی فەرمانبەر"],["أخرى","Other","هیتر"],["رقم الوثيقة","Document no.","ژمارەی بەڵگە"],["تاريخ الإصدار","Issue date","بەرواری دەرچوون"],["تاريخ الانتهاء","Expiry date","بەرواری بەسەرچوون"],["جهة الإصدار","Issuing authority","لایەنی دەرکردن"],["إضافة","Add","زیادکردن"],["إلغاء","Cancel","پاشگەزبوونەوە"],
+["إضافة كتاب رسمي","Add official letter","زیادکردنی نامەی فەرمی"],["نوع الكتاب","Letter type","جۆری نامە"],["كتاب رسمي","Official letter","نامەی فەرمی"],["أمر إداري","Administrative order","فەرمانی ئیداری"],["أمر وزاري","Ministerial order","فەرمانی وەزاری"],["تأييد","Confirmation","پشتڕاستکردنەوە"],["تنسيب","Nomination","ناوزەدکردن"],["نقل","Transfer","گواستنەوە"],["ترفيع","Promotion","بەرزکردنەوە"],["علاوة","Increment","زیادکردنی مووچە"],["رقم الكتاب","Letter no.","ژمارەی نامە"],["تاريخ الكتاب","Letter date","بەرواری نامە"],["موجه إلى","Addressed to","ئاراستەکراو بۆ"],["إرفاق صورة / PDF","Attach image / PDF","پێوەکردنی وێنە / PDF"],
+["لا توجد أوراق ثبوتية","No documents","هیچ بەڵگەیەک نییە"],["لا توجد كتب رسمية","No official letters","هیچ نامەیەکی فەرمی نییە"],["منتهية","Expired","بەسەرچووە"],
+["اكتب اسم الموظف أولاً","Enter the employee name first","سەرەتا ناوی فەرمانبەر بنووسە"],["تم حفظ الملف بنجاح","File saved successfully","فایلەکە بە سەرکەوتوویی پاشەکەوت کرا"],["المساحة ممتلئة: قلّل حجم المرفقات أو أنشئ نسخة احتياطية","Storage is full: reduce attachment size or make a backup","شوێنی هەڵگرتن پڕە: قەبارەی پێوەکراوەکان کەم بکەرەوە یان کۆپی یەدەگ دروست بکە"],["تم فتح ملف جديد","New file opened","فایلێکی نوێ کرایەوە"],["تم فتح ملف الموظف","Employee file opened","فایلی فەرمانبەر کرایەوە"],["حدد موظفاً أولاً","Select an employee first","سەرەتا فەرمانبەرێک هەڵبژێرە"],["حذف ملف الموظف؟","Delete the employee file?","فایلی فەرمانبەر بسڕدرێتەوە؟"],["تم الحذف","Deleted","سڕایەوە"],["أدخل رقم الوثيقة","Enter the document number","ژمارەی بەڵگە بنووسە"],["تمت إضافة الوثيقة","Document added","بەڵگە زیادکرا"],["تم حذف الوثيقة","Document deleted","بەڵگە سڕایەوە"],["أدخل رقم الكتاب أو موضوعه","Enter the letter number or subject","ژمارە یان بابەتی نامە بنووسە"],["حجم المرفق كبير (الحد 1.5 ميغابايت)","Attachment too large (max 1.5 MB)","پێوەکراو زۆر گەورەیە (زۆرترین 1.5 مێگابایت)"],["تمت إضافة الكتاب الرسمي","Official letter added","نامەی فەرمی زیادکرا"],["تم حذف الكتاب","Letter deleted","نامە سڕایەوە"],["تم إنشاء النسخة الاحتياطية","Backup created","کۆپیی یەدەگ دروست کرا"],["تم استرجاع البيانات","Data restored","داتاکان گەڕێندرانەوە"],["ملف النسخة الاحتياطية غير صالح","Invalid backup file","فایلی کۆپیی یەدەگ دروست نییە"],["لا توجد بيانات للتصدير","No data to export","داتا نییە بۆ هەناردەکردن"],["تم تصدير الملف","File exported","فایلەکە هەناردە کرا"],["اختر «حفظ كـ PDF» من نافذة الطباعة","Choose “Save as PDF” in the print dialog","لە پەنجەرەی چاپکردن «Save as PDF» هەڵبژێرە"],
+["أسود وذهبي","Black & gold","ڕەش و زێڕین"],["أخضر","Green","سەوز"],["أزرق ملكي","Royal blue","شینی شاهانە"],["بنفسجي","Purple","مۆر"],["عنابي","Burgundy","عونابی"],["حول","About","دەربارە"],["الإصدار 2.0","Version 2.0","وەشانی 2.0"],["تطبيق لإدارة الملفات الشخصية والوظيفية للموظفين وحفظ وثائقهم وكتبهم الرسمية في مكان واحد.","An app for managing employees' personal and job files and keeping their documents and official letters in one place.","بەرنامەیەک بۆ بەڕێوەبردنی فایلی کەسی و کاری فەرمانبەران و هەڵگرتنی بەڵگە و نامە فەرمییەکانیان لە یەک شوێندا."],["يعمل محليًا على جهازك دون الحاجة إلى إنترنت.","Runs locally on your device without needing the internet.","لەسەر ئامێرەکەت بەبێ پێویستی بە ئینتەرنێت کار دەکات."],["اللغات المدعومة: العربية، الكوردية، الإنجليزية.","Supported languages: Arabic, Kurdish, English.","زمانە پشتگیریکراوەکان: عەرەبی، کوردی، ئینگلیزی."],["المطوّر:","Developer:","پەرەپێدەر:"],["© 2026 جميع الحقوق محفوظة.","© 2026 All rights reserved.","© 2026 هەموو مافەکان پارێزراون."],["سياسة الخصوصية","Privacy Policy","سیاسەتی نهێنی"],["لا يجمع التطبيق أي بيانات عنك، والحساب اختياري ويُحفظ محليًا على جهازك فقط.","The app does not collect any data about you; an account is optional and is stored only on your device.","بەرنامەکە هیچ داتایەک دەربارەی تۆ کۆناکاتەوە، و هەژمار ئارەزوومەندانەیە و تەنها لەسەر ئامێرەکەت هەڵدەگیرێت."],["البيانات التي تُدخلها (الشخصية والوظيفية والوثائق والكتب الرسمية ومرفقاتها) تُخزَّن محليًا على جهازك فقط.","The data you enter (personal, job, documents, official letters and their attachments) is stored locally on your device only.","ئەو داتایانەی دەیانخەیتە ناوەوە (کەسی، کار، بەڵگەکان، نامە فەرمییەکان و پێوەکراوەکانیان) تەنها لەسەر ئامێرەکەت هەڵدەگیرێن."],["لا نشارك بياناتك مع أي طرف ثالث، ولا نستخدم إعلانات أو أدوات تتبع.","We do not share your data with any third party, and we use no ads or tracking tools.","داتاکانت لەگەڵ هیچ لایەنی سێیەمدا هاوبەش ناکەین و هیچ ڕیکلام یان ئامرازی شوێنکەوتن بەکارنایەنین."],["عند اختيار خط من الإنترنت يتصل جهازك بخدمة Google Fonts لتحميله، وقد تصلها معلومات اتصال عادية مثل عنوان IP.","When you choose an online font, your device connects to Google Fonts to load it, and ordinary connection details such as your IP address may reach it.","کاتێک فۆنتێک لە ئینتەرنێت هەڵدەبژێریت، ئامێرەکەت پەیوەندی بە Google Fonts دەکات بۆ بارکردنی، و لەوانەیە زانیاری ئاسایی پەیوەندی وەک ناونیشانی IP بگاتە ئەوێ."],["ملفات النسخة الاحتياطية وملفات التصدير (Excel وPDF) تُحفظ في المكان الذي تختاره، وأنت المسؤول عن حمايتها.","Backup and export files (Excel and PDF) are saved wherever you choose, and you are responsible for protecting them.","فایلی کۆپیی یەدەگ و هەناردەکردن (Excel و PDF) لەو شوێنەدا هەڵدەگیرێن کە تۆ هەڵیدەبژێریت، و تۆ بەرپرسیت لە پاراستنیان."],["يمكنك حذف أي ملف موظف في أي وقت، ومسح كل البيانات من إعدادات المتصفح أو التطبيق.","You can delete any employee file at any time, and clear all data from the browser or app settings.","دەتوانیت هەر فایلێکی فەرمانبەر لە هەر کاتێکدا بسڕیتەوە، و هەموو داتاکان لە ڕێکخستنەکانی وێبگەڕ یان بەرنامە پاک بکەیتەوە."],["للاستفسار عن الخصوصية تواصل معنا عبر واتساب من قسم التواصل.","For privacy questions, contact us via WhatsApp from the Contact section.","بۆ پرسیار دەربارەی نهێنی، لە بەشی پەیوەندی لە ڕێگەی WhatsApp پەیوەندیمان پێوە بکە."],["قد تُحدَّث سياسة الخصوصية هذه عند صدور إصدارات جديدة.","This privacy policy may be updated when new versions are released.","لەوانەیە ئەم سیاسەتی نهێنییە لە وەشانە نوێیەکان نوێ بکرێتەوە."],["الشروط والأحكام","Terms & Conditions","مەرج و ڕێساکان"],["جميع البيانات التي تُدخلها تُحفظ محليًا على جهازك فقط، ولا تُرسل إلى أي خادم.","All the data you enter is stored locally on your device only and is not sent to any server.","هەموو ئەو داتایانەی دەیانخەیتە ناوەوە تەنها لەسەر ئامێرەکەت هەڵدەگیرێن و بۆ هیچ سێرڤەرێک نانێردرێن."],["أنت المسؤول عن دقة البيانات وعن حمايتها، وعن حماية جهازك من الوصول غير المصرّح به.","You are responsible for the accuracy and protection of the data, and for protecting your device from unauthorized access.","تۆ بەرپرسیت لە دروستی و پاراستنی داتاکان و لە پاراستنی ئامێرەکەت لە دەستگەیشتنی نایاسایی."],["يُنصح بإنشاء نسخة احتياطية بشكل دوري، فحذف بيانات المتصفح أو التطبيق أو تغيير الجهاز قد يؤدي إلى فقدان البيانات.","Make backups regularly: clearing browser or app data, or changing devices, may cause data loss.","پێشنیار دەکرێت کۆپیی یەدەگ بە شێوەی بەردەوام دروست بکەیت، چونکە سڕینەوەی داتای وێبگەڕ یان بەرنامە یان گۆڕینی ئامێر دەبێتە هۆی لەدەستدانی داتا."],["يحتوي التطبيق على بيانات شخصية حساسة، فلا تشاركها أو تطبعها إلا لجهة مخوّلة بذلك.","The app holds sensitive personal data; do not share or print it except with an authorized party.","بەرنامەکە داتای کەسی هەستیار لەخۆ دەگرێت، بۆیە تەنها بۆ لایەنێکی ڕێپێدراو هاوبەشی مەکە و چاپی مەکە."],["عند اختيار خطوط من الإنترنت قد يُحمَّل الخط من خدمة Google Fonts، وزر واتساب يفتح تطبيقًا خارجيًا يخضع لشروطه.","Choosing online fonts may load them from Google Fonts, and the WhatsApp button opens an external app governed by its own terms.","هەڵبژاردنی فۆنت لە ئینتەرنێت لەوانەیە لە Google Fonts باربکرێت، و دوگمەی WhatsApp بەرنامەیەکی دەرەکی دەکاتەوە کە ڕێساکانی خۆی هەیە."],["يُقدَّم التطبيق كما هو دون أي ضمان، ولا يتحمل مطوّره مسؤولية أي خسارة ناتجة عن استخدامه.","The app is provided as is without any warranty, and its developer is not liable for any loss resulting from its use.","بەرنامەکە وەک خۆی پێشکەش دەکرێت بەبێ هیچ گەرەنتییەک، و پەرەپێدەرەکەی بەرپرس نییە لە هیچ زیانێک کە لە بەکارهێنانی بێتە ئاراوە."],["استمرارك في استخدام التطبيق يعني موافقتك على هذه الشروط، وقد تُحدَّث عند صدور إصدارات جديدة.","By continuing to use the app you agree to these terms, which may be updated in new versions.","بەردەوامبوونت لە بەکارهێنانی بەرنامەکە واتە ڕازیبوونت بەم مەرجانە، و لەوانەیە لە وەشانە نوێیەکان نوێ بکرێنەوە."],["التواصل","Contact","پەیوەندی"],["💬 تواصل عبر واتساب","💬 Contact via WhatsApp","💬 پەیوەندی بە WhatsApp"],["🪪 إضافة الهويات","🪪 Add IDs","🪪 زیادکردنی ناسنامەکان"],["الهوية العراقية","Iraqi ID","ناسنامەی عێراقی"],["بطاقة السكن","Residence card","کارتی نیشتەجێبوون"],["رقم الهوية","ID number","ژمارەی ناسنامە"],["رقم السجل","Register no.","ژمارەی تۆمار"],["رقم الصحيفة","Page no.","ژمارەی لاپەڕە"],["صورة الهوية","ID photo","وێنەی ناسنامە"],["＋ إرفاق صورة","＋ Attach photo","＋ پێوەکردنی وێنە"],["حذف الصورة","Delete photo","سڕینەوەی وێنە"],["رقم بطاقة السكن","Residence card no.","ژمارەی کارتی نیشتەجێبوون"],["المحلة","Neighborhood","گەڕەک"],["الزقاق","Alley","کۆڵان"],["رقم الدار","House no.","ژمارەی خانوو"],["صورة بطاقة السكن","Residence card photo","وێنەی کارتی نیشتەجێبوون"],["تمت إضافة الصورة","Photo added","وێنە زیادکرا"],["الملف ليس صورة","The file is not an image","فایلەکە وێنە نییە"],["📝 تصدير Word","📝 Export Word","📝 هەناردەی Word"],["تم تصدير ملف Word","Word file exported","فایلی Word هەناردە کرا"],["🔒 تسجيل الدخول","🔒 Sign in","🔒 چوونەژوورەوە"],["اسم المستخدم","Username","ناوی بەکارهێنەر"],["كلمة المرور","Password","وشەی نهێنی"],["دخول","Sign in","چوونەژوورەوە"],["نسيت كلمة المرور؟","Forgot your password?","وشەی نهێنیت لەبیرچووە؟"],["بيانات الدخول غير صحيحة","Incorrect login details","زانیاری چوونەژوورەوە هەڵەیە"],["الحساب","Account","هەژمار"],["إنشاء حساب","Create account","دروستکردنی هەژمار"],["تسجيل خروج","Sign out","چوونەدەرەوە"],["حذف الحساب","Delete account","سڕینەوەی هەژمار"],["مسجّل الدخول:","Signed in as:","چووەتە ژوورەوە:"],["هذا حساب محلي على جهازك فقط، لا يوجد استرجاع لكلمة المرور.","This is a local account on your device only; passwords cannot be recovered.","ئەمە هەژمارێکی ناوخۆییە لەسەر ئامێرەکەت، گەڕاندنەوەی وشەی نهێنی نییە."],["أدخل اسم المستخدم وكلمة مرور (4 أحرف على الأقل)","Enter a username and a password (at least 4 characters)","ناوی بەکارهێنەر و وشەی نهێنی بنووسە (لانیکەم 4 پیت)"],["تم إنشاء الحساب","Account created","هەژمار دروست کرا"],["تم حذف الحساب","Account deleted","هەژمار سڕایەوە"],["حذف الحساب؟","Delete the account?","هەژمار بسڕدرێتەوە؟"],["سيتم حذف الحساب وكل البيانات من هذا الجهاز. متابعة؟","The account and all data on this device will be deleted. Continue?","هەژمار و هەموو داتاکان لەم ئامێرە دەسڕدرێنەوە. بەردەوام بیت؟"],["📷 الصور الشخصية","📷 Personal photos","📷 وێنە کەسییەکان"],["الصور الشخصية","Personal photos","وێنە کەسییەکان"],["📷 التقاط صورة","📷 Take a photo","📷 گرتنی وێنە"],["🖼️ من المعرض","🖼️ From gallery","🖼️ لە گەلەری"],["لا توجد صور","No photos","هیچ وێنەیەک نییە"],["تم حذف الصورة","Photo deleted","وێنە سڕایەوە"],["الحد الأقصى 12 صورة","Maximum 12 photos","زۆرترین 12 وێنە"],["📷 التقاط تلقائي","📷 Auto capture","📷 گرتنی ئۆتۆماتیکی"],["تم التقاط الصورة وتعديلها تلقائيًا","Photo captured and adjusted automatically","وێنە گیرا و بە شێوەی ئۆتۆماتیکی ڕێکخرا"],["📤 نسخة احتياطية ومشاركة","📤 Backup & share","📤 کۆپیی یەدەگ و هاوبەشکردن"],["تمت مشاركة النسخة الاحتياطية","Backup shared","کۆپیی یەدەگ هاوبەش کرا"],["سيتم استبدال البيانات الحالية بالنسخة الاحتياطية. متابعة؟","The current data will be replaced by the backup. Continue?","داتای ئێستا بە کۆپیی یەدەگ دەگۆڕدرێت. بەردەوام بیت؟"],["نعم، متابعة","Yes, continue","بەڵێ، بەردەوام بە"],["المظهر","Appearance","ڕووکار"],["الاسم الأول","First name","ناوی یەکەم"],["اسم الأب","Father's name","ناوی باوک"],["اسم الجد","Grandfather's name","ناوی باپیر"],["اسم الزوج / الزوجة","Spouse name","ناوی هاوسەر"],["💍 الزوجية","💍 Marriage","💍 هاوسەرگیری"],["معلومات الزوجية","Marriage information","زانیاری هاوسەرگیری"],["نعم","Yes","بەڵێ"],["لا","No","نەخێر"],["اسم أب الزوج / الزوجة","Spouse's father's name","ناوی باوکی هاوسەر"],["اسم جد الزوج / الزوجة","Spouse's grandfather's name","ناوی باپیری هاوسەر"],["لقب الزوج / الزوجة","Spouse's surname","ناوی بنەماڵەی هاوسەر"],["تاريخ ميلاد الزوج / الزوجة","Spouse's date of birth","بەرواری لەدایکبوونی هاوسەر"],["مكان ولادة الزوج / الزوجة","Spouse's place of birth","شوێنی لەدایکبوونی هاوسەر"],["رقم هوية الزوج / الزوجة","Spouse's ID number","ژمارەی ناسنامەی هاوسەر"],["هاتف الزوج / الزوجة","Spouse's phone","تەلەفۆنی هاوسەر"],["مهنة الزوج / الزوجة","Spouse's occupation","پیشەی هاوسەر"],["جهة عمل الزوج / الزوجة","Spouse's employer","شوێنی کاری هاوسەر"],["هل الزوج / الزوجة موظف حكومي؟","Is the spouse a government employee?","ئایا هاوسەر فەرمانبەری حکومییە؟"],["تاريخ الزواج","Marriage date","بەرواری هاوسەرگیری"],["مكان الزواج","Marriage place","شوێنی هاوسەرگیری"],["رقم عقد الزواج","Marriage contract no.","ژمارەی گرێبەستی هاوسەرگیری"],["جهة عقد الزواج / المحكمة","Marriage contract authority / court","لایەنی گرێبەست / دادگا"],["أسماء الأطفال وأعمارهم","Children's names and ages","ناوی منداڵان و تەمەنیان"],["ملاحظات الزوجية","Marriage notes","تێبینی هاوسەرگیری"],["اسم جد الأب","Great-grandfather's name","ناوی باپیری باوک"],["اللقب","Surname","ناوی بنەماڵە"],["اسم أب الأم","Mother's father's name","ناوی باوکی دایک"],["اسم جد الأم","Mother's grandfather's name","ناوی باپیری دایک"],["الخط","Font","فۆنت"],["الافتراضي","Default","بنەڕەت"],["خط مخصص","Custom font","فۆنتی تایبەت"],["＋ رفع ملف خط (مثل البغدادي)","＋ Upload a font file (e.g. Baghdadi)","＋ بارکردنی فایلی فۆنت (وەک بەغدادی)"],["تم تطبيق الخط","Font applied","فۆنت جێبەجێ کرا"],["حجم الخط كبير (الحد 1.5 ميغابايت)","Font file too large (max 1.5 MB)","فایلی فۆنت زۆر گەورەیە (زۆرترین 1.5 مێگابایت)"],["الملف ليس خطًا صالحًا","Not a valid font file","فایلەکە فۆنتێکی دروست نییە"],
+["⚙️ الإعدادات","⚙️ Settings","⚙️ ڕێکخستنەکان"],["اللغة","Language","زمان"],["لون التطبيق","App color","ڕەنگی بەرنامە"],["وضع العرض","Display mode","دۆخی پیشاندان"],["فاتح","Light","ڕووناک"],["داكن","Dark","تاریک"],["زوايا العناصر","Corner style","شێوەی گوشەکان"],["مدورة","Rounded","خڕ"],["حادة","Square","تیژ"],["حجم الخط","Font size","قەبارەی نووسین"],["صغير","Small","بچووک"],["متوسط","Medium","ناوەند"],["كبير","Large","گەورە"],["إعادة الضبط","Reset","گەڕاندنەوە بۆ بنەڕەت"],["إغلاق","Close","داخستن"]
+].forEach(a=>T[a[0]]=[a[1],a[2]]);
+let LANG="ar";const nodeMap=new WeakMap();
+function trText(t){if(LANG==="ar")return t;let m=t.match(/^تنتهي بعد (\d+) يوم$/);if(m)return LANG==="en"?"Expires in "+m[1]+" days":m[1]+" ڕۆژی ماوە";let x=T[t];return x?x[LANG==="en"?0:1]:t}
+function tr(t){return trText(t)}
+const obs=new MutationObserver(()=>xlate());
+function xlate(){obs.disconnect();let w=document.createTreeWalker(document.documentElement,NodeFilter.SHOW_TEXT),n;while(n=w.nextNode()){let p=n.parentNode.nodeName;if(p==="SCRIPT"||p==="STYLE"||p==="TEXTAREA")continue;let rec=nodeMap.get(n),cur=n.data;if(!rec||cur!==rec.t){rec={o:cur,t:cur};nodeMap.set(n,rec)}let k=rec.o.trim();if(!k)continue;let res=rec.o.replace(k,trText(k));if(res!==cur)n.data=res;rec.t=n.data}
+document.querySelectorAll("[placeholder]").forEach(e=>{if(e._po===undefined)e._po=e.getAttribute("placeholder");e.setAttribute("placeholder",trText(e._po))});
+obs.observe(document.documentElement,{childList:true,subtree:true,characterData:true})}
+const FONTS={def:{n:"الافتراضي",f:"Arial,Tahoma,sans-serif"},cairo:{n:"Cairo كايرو",g:"Cairo",f:'"Cairo"'},tajawal:{n:"Tajawal تجوال",g:"Tajawal",f:'"Tajawal"'},amiri:{n:"Amiri أميري",g:"Amiri",f:'"Amiri"'},sch:{n:"Scheherazade شهرزاد",g:"Scheherazade+New",f:'"Scheherazade New"'},ruqaa:{n:"Aref Ruqaa رقعة",g:"Aref+Ruqaa",f:'"Aref Ruqaa"'},kufi:{n:"Noto Kufi كوفي",g:"Noto+Kufi+Arabic",f:'"Noto Kufi Arabic"'},reem:{n:"Reem Kufi ريم كوفي",g:"Reem+Kufi",f:'"Reem Kufi"'},custom:{n:"خط مخصص",f:'"UserFont"'}};
+function loadGF(keys){let fam=keys.filter(k=>FONTS[k]&&FONTS[k].g&&!FONTS[k]._l);if(!fam.length)return;fam.forEach(k=>FONTS[k]._l=1);let l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?"+fam.map(k=>"family="+FONTS[k].g+":wght@400;700").join("&")+"&display=swap";document.head.appendChild(l)}
+function regCustom(){let d;try{d=localStorage.getItem("pro_font")}catch(e){}if(!d)return;new FontFace("UserFont","url("+d+")").load().then(f=>document.fonts.add(f)).catch(()=>{})}
+function loadFont(e){let f=e.target.files[0];e.target.value="";if(!f)return;if(f.size>1500000){toast("حجم الخط كبير (الحد 1.5 ميغابايت)");return}let r=new FileReader();r.onload=()=>{let d=r.result;new FontFace("UserFont","url("+d+")").load().then(ff=>{document.fonts.add(ff);try{localStorage.setItem("pro_font",d)}catch(x){toast("المساحة ممتلئة: قلّل حجم المرفقات أو أنشئ نسخة احتياطية");return}setOpt("font","custom");toast("تم تطبيق الخط")}).catch(()=>toast("الملف ليس خطًا صالحًا"))};r.readAsDataURL(f)}
+function pickFont(k){if(k==="custom"&&!localStorage.getItem("pro_font")){fontFile.click();return}setOpt("font",k)}
+let S={lang:"ar",theme:"gold",font:"def",radius:"round",size:"m"};try{Object.assign(S,JSON.parse(localStorage.getItem("pro_settings")||"{}"))}catch(e){}
+function saveS(){try{localStorage.setItem("pro_settings",JSON.stringify(S))}catch(e){}}
+function setOpt(g,v){S[g]=v;saveS();applySettings()}
+function setMode(d){document.body.classList.toggle("dark",d);try{localStorage.setItem("pro_dark",d)}catch(e){}markActive()}
+function resetSettings(){S={lang:S.lang,theme:"gold",font:"def",radius:"round",size:"m"};saveS();setMode(false);applySettings()}
+function togg(l){let o=!l.classList.contains('open');l.classList.toggle('open',o);let n=l.nextElementSibling;while(n&&!n.classList.contains('setlbl')&&!n.classList.contains('actions')){n.style.display=o?'':'none';n=n.nextElementSibling}}
+function openSettings(){loadGF(Object.keys(FONTS));markActive();openModal("setModal")}
+function markActive(){document.querySelectorAll(".opt,.sw").forEach(b=>{let g=b.dataset.g,v=b.dataset.v;b.classList.toggle("active",g==="mode"?document.body.classList.contains("dark")===(v==="dark"):S[g]===v)})}
+function applySettings(){let r=document.documentElement,th=THEMES[S.theme]||THEMES.gold;Object.keys(th).forEach(k=>r.style.setProperty("--"+k,th[k]));if(!FONTS[S.font])S.font="def";loadGF([S.font]);r.style.setProperty("--ff",FONTS[S.font].f+",Arial,Tahoma,sans-serif");LANG=S.lang;r.lang=LANG==="ku"?"ckb":LANG;r.dir=LANG==="en"?"ltr":"rtl";let b=document.body;b.classList.toggle("sq",S.radius==="sq");b.classList.remove("fs-s","fs-l");if(S.size==="s")b.classList.add("fs-s");if(S.size==="l")b.classList.add("fs-l");markActive();xlate()}
+async function hashPw(p,salt){let t=salt+":"+p;if(window.crypto&&crypto.subtle){let b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}let h=5381,g=52711;for(let i=0;i<t.length;i++){h=(h*33)^t.charCodeAt(i);g=(g*31+t.charCodeAt(i))>>>0}return"f"+(h>>>0).toString(16)+g.toString(16)}
+function getAcct(){try{return JSON.parse(localStorage.getItem("pro_acct"))}catch(e){return null}}
+function inSess(){try{return sessionStorage.getItem("pro_in")==="1"}catch(e){return false}}
+function setSess(v){try{v?sessionStorage.setItem("pro_in","1"):sessionStorage.removeItem("pro_in")}catch(e){}}
+function renderAcct(){let a=getAcct();$("acctBox").innerHTML=a?'<p>مسجّل الدخول: <b dir="ltr">'+esc(a.u)+'</b></p><div class="actions"><button class="btn primary" onclick="logout()">تسجيل خروج</button><button class="btn danger" onclick="delAcct()">حذف الحساب</button></div>':'<p>هذا حساب محلي على جهازك فقط، لا يوجد استرجاع لكلمة المرور.</p><div class="grid"><div class="field"><input id="nUser" placeholder="اسم المستخدم"></div><div class="field"><input id="nPass" type="password" placeholder="كلمة المرور"></div></div><div class="actions"><button class="btn primary" onclick="createAcct()">إنشاء حساب</button></div>'}
+async function createAcct(){let u=$("nUser").value.trim(),p=$("nPass").value;if(!u||p.length<4){toast("أدخل اسم المستخدم وكلمة مرور (4 أحرف على الأقل)");return}let salt=Math.random().toString(36).slice(2),h=await hashPw(p,salt);try{localStorage.setItem("pro_acct",JSON.stringify({u:u,s:salt,h:h}))}catch(e){toast("المساحة ممتلئة: قلّل حجم المرفقات أو أنشئ نسخة احتياطية");return}setSess(true);renderAcct();toast("تم إنشاء الحساب")}
+function logout(){setSess(false);closeModal("setModal");showLock()}
+function delAcct(){askConfirm("حذف الحساب؟",()=>{try{localStorage.removeItem("pro_acct")}catch(e){}renderAcct();toast("تم حذف الحساب")})}
+function showLock(){$("lock").style.display="flex";$("lUser").value="";$("lPass").value="";$("lErr").textContent=""}
+async function doLogin(){let a=getAcct();if(!a){$("lock").style.display="none";return}let h=await hashPw($("lPass").value,a.s);if($("lUser").value.trim()===a.u&&h===a.h){setSess(true);$("lock").style.display="none"}else $("lErr").textContent="بيانات الدخول غير صحيحة"}
+function forgotPw(){askConfirm("سيتم حذف الحساب وكل البيانات من هذا الجهاز. متابعة؟",()=>{try{localStorage.clear();sessionStorage.clear()}catch(e){}location.reload()})}
+function initI18n(){renderAcct();if(getAcct()&&!inSess())showLock();document.querySelectorAll('.setlbl').forEach(l=>{l.onclick=()=>togg(l);l.classList.add('open');togg(l)});regCustom();$("fontOpts").innerHTML=Object.keys(FONTS).map(k=>'<button class="opt" data-g="font" data-v="'+k+'" style="font-family:'+FONTS[k].f.replace(/"/g,"'")+',Arial" onclick="pickFont(\''+k+'\')">'+FONTS[k].n+"</button>").join("");document.querySelectorAll("option").forEach(o=>{if(!o.hasAttribute("value"))o.setAttribute("value",o.textContent.trim())});$("swatches").innerHTML=Object.keys(THEMES).map(k=>'<button class="opt" data-g="theme" data-v="'+k+'" onclick="setOpt(\'theme\',\''+k+'\')"><span class="dot" style="background:'+THEMES[k].p+'"></span>'+({gold:"أسود وذهبي",green:"أخضر",blue:"أزرق ملكي",purple:"بنفسجي",burgundy:"عنابي"})[k]+"</button>").join("");applySettings()}
+F.forEach(x=>$(x).addEventListener("input",preview));
+$("start").addEventListener("change",calcService);
+if(localStorage.getItem("pro_dark")==="true")document.body.classList.add("dark");
+load();
+initI18n();
+if("serviceWorker" in navigator&&location.protocol.indexOf("http")===0)navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script>
+</body>
+</html>
